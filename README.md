@@ -23,9 +23,9 @@ Few-shot brain MRI diagnosis faces three fundamental challenges: (1) augmented s
 
 | Module | Code Name | Role |
 |--------|-----------|------|
-| **DEIP** | `models/deip.py` | Differentiable imaging physics-driven data prior enhancement: K-space undersampling (Eq.3-4), motion artifacts (Eq.5-6), and lesion-centered deformation (Eq.7-9); the constraint parameters are learnable and optimized with Gumbel-Softmax sampling |
-| **BiAT** | `models/biat.py` | Attention-based local/global fusion (M=4 patches) with bidirectional self-distillation (Eq.10-15) |
-| **SFDP** | `models/sfdp.py` | Self-calibrating dual-layer (class + M=4 sub) prototypes with differentiable rectification (Eq.16-23) |
+| **DEIP** | `models/deip.py` | Differentiable imaging physics-driven data prior enhancement: K-space undersampling , motion artifacts, and lesion-centered deformation (Eq.7-9); the constraint parameters are learnable and optimized with Gumbel-Softmax sampling |
+| **BiAT** | `models/biat.py` | Attention-based local/global fusion with bidirectional self-distillation |
+| **SFDP** | `models/sfdp.py` | Self-calibrating dual-layer prototypes with differentiable rectification  |
 
 Experimental evaluations demonstrate:
 - **80.15%** / **90.78%** 5-way 1-shot / 5-shot on **Brain44**
