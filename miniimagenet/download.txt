@@ -1,0 +1,5 @@
+miniImageNet dataset (100 classes, 600 samples each):
+https://www.kaggle.com/datasets/arjunashok33/miniimagenet
+
+Split files (Ravi & Larochelle, ICLR 2017):
+https://github.com/yaoyao-liu/mini-imagenet-tools

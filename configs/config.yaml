@@ -1,0 +1,80 @@
+# PSD-Few configuration.
+# Active dataset selected via: python run.py --dataset {miniimagenet,archive_44,archive_15}
+
+seed: 42
+deterministic: true
+device: "cuda:0"
+
+datasets:
+  miniimagenet:
+    data_root: "./miniimagenet"
+    image_size: 84
+    use_deip: false        # off on natural images
+  archive_44:
+    data_root: "./archive_44"
+    image_size: 224
+    use_deip: true
+  archive_15:
+    data_root: "./archive_15"
+    image_size: 224
+    use_deip: true
+
+data:
+  split_ratio: [0.7, 0.2, 0.1]  # category-level train/val/test split
+  num_workers: 4
+  n_way: 5
+  k_shot: 5
+  n_query: 15
+
+training:
+  epochs: 200
+  train_episodes: 200           # episodes per training epoch
+  val_episodes: 100             # validation episodes
+  test_episodes: 100            # test episodes per seed
+  num_seeds: 5                  # evaluation seeds
+  optimizer: "adam"
+  learning_rate: 0.001          # Adam learning rate
+  weight_decay: 0.0
+  lr_scheduler: "cosine"
+  lr_min: 1.0e-07
+  grad_clip: 1.0
+  eval_every: 10
+  early_stop_patience: 30
+
+model:
+  feat_dim: 512
+  num_patches: 4                # M local patches
+  num_sub_prototypes: 4         # FPS sub-prototypes
+  num_iterations: 3             # T rectification iterations
+  fusion_alpha: 0.65            # coarse/fine fusion weight (Eq.23)
+  pretrained: true
+
+deip:
+  # Initial values of the learnable DEIP parameters.
+  init_rho_c: 0.4               # central-band retention ratio
+  init_rho_h: 0.5               # high-frequency Bernoulli probability
+  init_s: 1.0                   # artifact intensity
+  init_omega: 5.0               # artifact frequency
+  init_sigma_att: 0.08          # deformation attenuation
+  init_mu: 30.0                 # deformation intensity
+  smoothing_sigma: 3.0          # displacement-field smoothing
+
+loss:
+  lambda_d: 0.8                 # distillation weight (Eq.24)
+  lambda_f: 0.15                # fine-grained weight (Eq.24)
+
+ablation:
+  innovation_names: ["DEIP", "BiAT", "SFDP"]
+  finetune_epochs: 30
+
+sota:
+  # Reference results from the manuscript tables.
+  miniimagenet:
+    "5way_1shot": 0.7241
+    "5way_5shot": 0.8510
+  archive_44:
+    "5way_1shot": 0.8015
+    "5way_5shot": 0.9078
+  archive_15:
+    "3way_1shot": 0.6234
+    "3way_5shot": 0.7732

@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Runtime artifacts
+logs/
+outputs/
+experiment_summary.json
+
+# Checkpoints & weights
+weights/*.pth
+weights/*.zip
+DDPG_*.zip
+
+# OS
+.DS_Store
+
+# Environments
+.venv/
+venv/
+env/
